@@ -41,8 +41,17 @@ source(paste0("variableset_", which_outcome,".R"))
 
 ## Step1 ----
 
-all_W_step1                       <- all_W[!all_W%in%c("prehba1c", "preegfr", "prebmi", "preweight")]
-T                                 <-  "tx_order"
+if(population_type == "study_population_female" | population_type == "study_population_male"){
+  
+  all_W_step1               <- all_W_notgender[!all_W_notgender%in%c("prehba1c", "preegfr", "prebmi", "preweight")]
+  
+}else{
+  
+  all_W_step1               <- all_W[!all_W%in%c("prehba1c", "preegfr", "prebmi", "preweight")]
+  
+}
+
+T                           <-  "tx_order"
 
 Ertefaie_rirs_model_step1_formula <- as.formula(paste(X, " ~ ", paste0(c(all_W_step1, T, "(tx_order|pracid)"), collapse =  " + ")))
 Ertefaie_rirs_model_step1         <- glmer(Ertefaie_rirs_model_step1_formula, family = binomial("logit"), data = data)
@@ -73,13 +82,34 @@ data_cc          <- data[complete.cases(data[ , variables_cc]), ]
 followup_time    <- data_cc[ , paste("followup_days_", which_outcome, "_c"  , censoring_type, sep = "")]
 
 
-IV_Ertefaie_rirs_model1_formula     <- as.formula(paste(X, " ~ ", paste0(c(all_W, Z), collapse =  " + ")))
+if(population_type == "study_population_female" | population_type == "study_population_male"){
+  
+  IV_Ertefaie_rirs_model2_formula     <- as.formula(paste(X, " ~ ", paste0(c(all_W_notgender, Z), collapse =  " + ")))
+  
+  }else{
+    
+    IV_Ertefaie_rirs_model1_formula   <- as.formula(paste(X, " ~ ", paste0(c(all_W, Z), collapse =  " + ")))
+    
+    }
+
+
 IV_Ertefaie_rirs_model1             <- glm(IV_Ertefaie_rirs_model1_formula, family = binomial, data = data_cc)
 
 data_cc$X_hat_IV_Ertefaie_rirs      <- as.numeric(IV_Ertefaie_rirs_model1$fitted.values)
 X_hat                               <- "X_hat_IV_Ertefaie_rirs"
 
-IV_Ertefaie_rirs_model2_formula     <- as.formula(paste(Y, " ~ ", paste0(c(X_hat, all_W), collapse =  " + ")))
+
+if(population_type == "study_population_female" | population_type == "study_population_male"){
+  
+  IV_Ertefaie_rirs_model2_formula  <- as.formula(paste(Y, " ~ ", paste0(c(X_hat, all_W_notgender), collapse =  " + ")))
+  
+  }else{
+    
+    IV_Ertefaie_rirs_model2_formula  <- as.formula(paste(Y, " ~ ", paste0(c(X_hat, all_W), collapse =  " + ")))
+    
+    }
+
+
 
 if(outcome_variable_type == "binary"){
   

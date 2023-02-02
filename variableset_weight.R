@@ -11,5 +11,7 @@ W_general           <- c("dstartdate_age", "gender_chr", "tx_startyear", "dstart
                          "prehba1c", "preegfr", "preweight", "prealt", "drugline_all", "ncurrtx")
 
 all_W               <- c(W_general)
+all_W_notgender     <- c(all_W[!all_W%in%c("gender_chr")])
 all_variables       <- c(X, Y,  W_general)
+
 

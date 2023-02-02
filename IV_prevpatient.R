@@ -51,13 +51,34 @@ followup_time   <- data_cc[ , paste("followup_days_", which_outcome, "_c"  , cen
 
 ## Estimation of the model (TSLS) ----
 
-IV_prevpatient_model1_formula     <- as.formula(paste(X, " ~ ", paste0(c(all_W, Z), collapse =  " + ")))
+
+if(population_type == "study_population_female" | population_type == "study_population_male"){
+  
+  IV_prevpatient_model1_formula  <- as.formula(paste(X, " ~ ", paste0(c(all_W_notgender, Z), collapse =  " + ")))
+  
+  }else{
+    
+    IV_prevpatient_model1_formula  <- as.formula(paste(X, " ~ ", paste0(c(all_W, Z), collapse =  " + ")))
+    
+    }
+
+
 IV_prevpatient_model1             <- glm(IV_prevpatient_model1_formula, family = binomial, data = data_cc)
 
 data_cc$X_hat_IV_prevpatient      <- as.numeric(IV_prevpatient_model1$fitted.values)
 X_hat                             <- "X_hat_IV_prevpatient"
 
-IV_prevpatient_model2_formula     <- as.formula(paste(Y, " ~ ", paste0(c(X_hat, all_W), collapse =  " + ")))
+
+if(population_type == "study_population_female" | population_type == "study_population_male"){
+  
+  IV_prevpatient_model2_formula  <- as.formula(paste(Y, " ~ ", paste0(c(X_hat, all_W_notgender), collapse =  " + ")))
+  
+  }else{
+    
+    IV_prevpatient_model2_formula  <- as.formula(paste(Y, " ~ ", paste0(c(X_hat, all_W), collapse =  " + ")))
+    
+    }
+
 
 if(outcome_variable_type == "binary"){
   
@@ -75,7 +96,7 @@ if(outcome_variable_type == "binary"){
 ## Extraction of the results ----
 
 assign(paste0("IV_prevpatient_",which_outcome,"_model_summary"), summ(IV_prevpatient_model2, confint = TRUE, digits = 4))
-assign(paste0("IV_prevpatient_",which_outcome,"_model1"), IV_prevpatient_model1)
+assign(paste0("IV_prevpatient_",which_outcome,"_model1"),        IV_prevpatient_model1)
 
 
 

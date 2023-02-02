@@ -53,7 +53,16 @@ followup_time  <- data_cc[ , paste("followup_days_", which_outcome, "_c"  , cens
 
 ## Estimation of the model ----
 
-PSM_formula  <- as.formula(paste(Y, " ~ ", paste0(c(X, all_W), collapse =  " + ")))
+if(population_type == "study_population_female" | population_type == "study_population_male"){
+  
+  PSM_formula  <- as.formula(paste(Y, " ~ ", paste0(c(X, all_W_notgender), collapse =  " + ")))
+  
+  }else{
+    
+    PSM_formula  <- as.formula(paste(Y, " ~ ", paste0(c(X, all_W), collapse =  " + ")))
+    
+    }
+
 
 if(outcome_variable_type == "binary"){
   

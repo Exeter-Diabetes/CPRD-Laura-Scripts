@@ -37,7 +37,7 @@ dont_delete     <- c("result_path", "data_path", "year_type", "censoring_type", 
 
 year_type       <- c("1year","3year")[2]
 censoring_type  <- c("A","B")[1]
-population_type <- c("study_population", "not_elderly", "elderly", "study_population_female", "study_population_male")[1]
+population_type <- c("study_population", "not_elderly", "elderly", "study_population_female", "study_population_male")[3]
 
 
 #

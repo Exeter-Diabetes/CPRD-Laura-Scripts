@@ -49,17 +49,25 @@ followup_time   <- data_cc[ , paste("followup_days_", which_outcome, "_c"  , cen
 
 ## Estimation of the model ----
 
-MVR_formula  <- as.formula(paste(Y, " ~ ", paste0(c(X, all_W), collapse =  " + ")))
+if(population_type == "study_population_female" | population_type == "study_population_male"){
+ 
+  MVR_formula  <- as.formula(paste(Y, " ~ ", paste0(c(X, all_W_notgender), collapse =  " + ")))
+  
+  }else{
+    
+    MVR_formula  <- as.formula(paste(Y, " ~ ", paste0(c(X, all_W), collapse =  " + ")))
+    
+    }
 
 if(outcome_variable_type == "binary"){
   
   MVR_model    <- glm(MVR_formula, offset = log(followup_time), family=poisson(link = log), data = data_cc)
   
-}else{
-  
-  MVR_model    <- lm(MVR_formula, data = data_cc)
-  
-}
+  }else{
+    
+    MVR_model    <- lm(MVR_formula, data = data_cc)
+    
+    }
 
 ## Extraction of the results ----
 
