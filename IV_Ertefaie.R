@@ -32,10 +32,6 @@ if(population_type == "study_population"){
 rm(study_cohort_wIV)
 
 
-## data preparation ----
-
-data$treatment    <- ifelse(data$drugclass == "DPP4", 0,1)
-
 ## define variable set ----
 
 source(paste0("variableset_", which_outcome,".R"))
@@ -52,8 +48,8 @@ if(population_type == "study_population_female" | population_type == "study_popu
     
     }
 
-Ertefaie_AX_model_step1_formula <- as.formula(paste(X, " ~ ", paste0(c(all_W_step1, "(1|pracid)"), collapse =  " + ")))
-Ertefaie_AX_model_step1         <- glmer(Ertefaie_AX_model_step1_formula, family = binomial("logit"), data = data)
+Ertefaie_model_step1_formula <- as.formula(paste(X, " ~ ", paste0(c(all_W_step1, "(1|pracid)"), collapse =  " + ")))
+Ertefaie_model_step1         <- glmer(Ertefaie_model_step1_formula, family = binomial("logit"), data = data)
 
 b_j_hat             <- ranef(Ertefaie_model_step1)$pracid$"(Intercept)"
 b_j_hat_median      <- median((exp(b_j_hat))/(1 + exp(b_j_hat)))

@@ -7,7 +7,8 @@ X                   <- "treatment"
 
 Y                   <- "outcome_weight"
 
-W_general           <- c("dstartdate_age", "gender_chr", "tx_startyear", "dstartdate_dm_dur_all", 
+W_general           <- c("ethnicity_cat", "imd2015_10", "smoking_cat" ,"dstartdate_age", 
+                         "gender_chr", "tx_startyear", "dstartdate_dm_dur_all", 
                          "prehba1c", "preegfr", "preweight", "prealt", "drugline_all", "ncurrtx")
 
 all_W               <- c(W_general)

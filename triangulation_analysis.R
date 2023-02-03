@@ -62,6 +62,39 @@ source("triangulation_method_summary.R")
 
 
 #
+# Micturition control models ---------------------------------------------------
+#
+
+
+which_outcome         <- "MR"
+outcome_variable_type <- "binary"
+
+source("triangulation_method_summary.R")
+
+
+#
+# Volume depletion models ------------------------------------------------------
+#
+
+
+which_outcome         <- "VD"
+outcome_variable_type <- "binary"
+
+source("triangulation_method_summary.R")
+
+
+#
+# Urinary frequency models -----------------------------------------------------
+#
+
+
+which_outcome         <- "UR"
+outcome_variable_type <- "binary"
+
+source("triangulation_method_summary.R")
+
+
+#
 # HbA1c models -----------------------------------------------------------------
 #
 

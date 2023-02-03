@@ -31,10 +31,6 @@ if(population_type == "study_population"){
 
 rm(study_cohort_wIV)
 
-## data preparation ----
-
-data$treatment    <- ifelse(data$drugclass == "DPP4", 0,1)
-
 ## define variable set ----
 
 source(paste0("variableset_", which_outcome,".R"))

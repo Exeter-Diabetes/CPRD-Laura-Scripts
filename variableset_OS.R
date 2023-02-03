@@ -9,8 +9,9 @@ Y                <- paste("outcome_osmo_c"  , censoring_type, sep = "")
 
 followup_time    <- data[ ,paste("followup_days_OS_c"  , censoring_type, sep = "")]
 
-W_general        <- c("dstartdate_age", "gender_chr", "tx_startyear", "dstartdate_dm_dur_all", 
-                      "prehba1c", "preegfr", "prebmi", "drugline_all", "ncurrtx")
+W_general        <- c("ethnicity_cat", "deprivation", "smoking_cat", "dstartdate_age", "gender_chr", 
+                      "tx_startyear", "dstartdate_dm_dur_all", "prehba1c", "preegfr", "prebmi", "prealt",
+                      "drugline_all", "ncurrtx")
 W_medical        <- c("m3_prior_ksparing_diuretics", "m3_prior_loop_diuretics", "m3_prior_thiazide_diuretics")
 W_history        <- c("predrug_osmo_cat", "predrug_benignprostatehyperplasia_cat")
 
