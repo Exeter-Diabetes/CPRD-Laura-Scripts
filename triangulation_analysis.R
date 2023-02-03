@@ -28,8 +28,8 @@ library(lme4)
 #
 # Some further necessary information -------------------------------------------
 #
-
-dont_delete     <- c("result_path", "data_path", "year_type", "censoring_type", "population_type", "which_outcome", "outcome_variable_type")
+variables_withNAs <- c("prehba1c", "preegfr", "prebmi", "preweight", "prealt", "ethnicity_cat", "deprivation", "smoking_cat")
+dont_delete       <- c("result_path", "data_path", "year_type", "censoring_type", "population_type", "which_outcome", "outcome_variable_type")
 
 #
 # Decision on analysis ---------------------------------------------------------

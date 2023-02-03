@@ -39,11 +39,11 @@ source(paste0("variableset_", which_outcome,".R"))
 
 if(population_type == "study_population_female" | population_type == "study_population_male"){
   
-  all_W_step1               <- all_W_notgender[!all_W_notgender%in%c("prehba1c", "preegfr", "prebmi", "preweight")]
+  all_W_step1               <- all_W_notgender[!all_W_notgender%in%variables_withNAs]
   
 }else{
   
-  all_W_step1               <- all_W[!all_W%in%c("prehba1c", "preegfr", "prebmi", "preweight")]
+  all_W_step1               <- all_W[!all_W%in%variables_withNAs]
   
 }
 
