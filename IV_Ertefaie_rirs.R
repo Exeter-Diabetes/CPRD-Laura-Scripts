@@ -71,11 +71,23 @@ data$IV_ePP_rirs    <- ifelse((exp(fitted_hat))/(1 + exp(fitted_hat)) > fitted_h
 
 ## Step 2 ----
  
-Z                <- "IV_ePP_rirs"
-variables_cc     <- c(Y, paste("followup_days_", which_outcome, "_c"  , censoring_type, sep = ""), all_W, Z)
-data_cc          <- data[complete.cases(data[ , variables_cc]), ]
+Z                  <- "IV_ePP_rirs"
 
-followup_time    <- data_cc[ , paste("followup_days_", which_outcome, "_c"  , censoring_type, sep = "")]
+if(outcome_variable_type == "binary"){
+  
+  variables_cc     <- c(Y, paste("followup_days_", which_outcome, "_c"  , censoring_type, sep = ""), all_W, Z)
+  data_cc          <- data[complete.cases(data[ , variables_cc]), ]
+  
+  ## define follow up time variable ----
+  
+  followup_time    <- data_cc[ , paste("followup_days_", which_outcome, "_c"  , censoring_type, sep = "")]
+  
+  }else{
+    
+    variables_cc     <- c(Y, all_W, Z)
+    data_cc          <- data[complete.cases(data[ , variables_cc]), ]
+    
+    }
 
 
 if(population_type == "study_population_female" | population_type == "study_population_male"){
@@ -106,7 +118,6 @@ if(population_type == "study_population_female" | population_type == "study_popu
     }
 
 
-
 if(outcome_variable_type == "binary"){
   
   IV_Ertefaie_rirs_model2             <- glm(IV_Ertefaie_rirs_model2_formula, offset = log(followup_time), family=poisson(link = log), data = data_cc)
@@ -120,8 +131,8 @@ if(outcome_variable_type == "binary"){
 
 ## Extraction of the results ----
 
-assign(paste0("IV_Ertefaie_rirs_",which_outcome,"_model_summary"), summ(IV_Ertefaie_rirs_model2, confint = TRUE, digits = 4))
-assign(paste0("IV_Ertefaie_rirs_",which_outcome,"_model1"), IV_Ertefaie_rirs_model1)
+assign(paste0("IV_Ertefaie_rirs_", which_outcome, "_model_summary"), summ(IV_Ertefaie_rirs_model2, confint = TRUE, digits = 4))
+assign(paste0("IV_Ertefaie_rirs_", which_outcome, "_model1"), IV_Ertefaie_rirs_model1)
 
 
 

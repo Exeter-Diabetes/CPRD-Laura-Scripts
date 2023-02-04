@@ -29,7 +29,7 @@ library(lme4)
 # Some further necessary information -------------------------------------------
 #
 variables_withNAs <- c("prehba1c", "preegfr", "prebmi", "preweight", "prealt", "ethnicity_cat", "deprivation", "smoking_cat")
-dont_delete       <- c("result_path", "data_path", "year_type", "censoring_type", "population_type", "which_outcome", "outcome_variable_type")
+dont_delete       <- c("result_path", "data_path", "year_type", "censoring_type", "population_type", "which_outcome", "outcome_variable_type", "variables_withNAs")
 
 #
 # Decision on analysis ---------------------------------------------------------
@@ -37,7 +37,7 @@ dont_delete       <- c("result_path", "data_path", "year_type", "censoring_type"
 
 year_type       <- c("1year","3year")[2]
 censoring_type  <- c("A","B")[1]
-population_type <- c("study_population", "not_elderly", "elderly", "study_population_female", "study_population_male")[3]
+population_type <- c("study_population", "not_elderly", "elderly", "study_population_female", "study_population_male")[2]
 
 
 #
@@ -66,7 +66,7 @@ source("triangulation_method_summary.R")
 #
 
 
-which_outcome         <- "MR"
+which_outcome         <- "MC"
 outcome_variable_type <- "binary"
 
 source("triangulation_method_summary.R")
@@ -88,7 +88,7 @@ source("triangulation_method_summary.R")
 #
 
 
-which_outcome         <- "UR"
+which_outcome         <- "UF"
 outcome_variable_type <- "binary"
 
 source("triangulation_method_summary.R")

@@ -64,10 +64,22 @@ data                <- data_merged
 ## Step 2 ----
 
 Z                <- "IV_ePP"
-variables_cc     <- c(Y, paste("followup_days_", which_outcome, "_c"  , censoring_type, sep = ""), all_W, Z)
-data_cc          <- data[complete.cases(data[ , variables_cc]), ]
 
-followup_time    <- data_cc[ , paste("followup_days_", which_outcome, "_c"  , censoring_type, sep = "")]
+if(outcome_variable_type == "binary"){
+  
+  variables_cc     <- c(Y, paste("followup_days_", which_outcome, "_c"  , censoring_type, sep = ""), all_W, Z)
+  data_cc          <- data[complete.cases(data[ , variables_cc]), ]
+  
+  ## define follow up time variable ----
+  
+  followup_time    <- data_cc[ , paste("followup_days_", which_outcome, "_c"  , censoring_type, sep = "")]
+  
+  }else{
+    
+    variables_cc     <- c(Y, all_W, Z)
+    data_cc          <- data[complete.cases(data[ , variables_cc]), ]
+    
+    }
 
 
 if(population_type == "study_population_female" | population_type == "study_population_male"){

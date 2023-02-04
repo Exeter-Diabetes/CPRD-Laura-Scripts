@@ -7,7 +7,7 @@ X                <- "treatment"
 
 Y                <- paste("outcome_urinary_frequency_c"  , censoring_type, sep = "")
 
-followup_time    <- data[ ,paste("followup_days_UR_c"  , censoring_type, sep = "")] 
+followup_time    <- data[ ,paste("followup_days_UF_c"  , censoring_type, sep = "")] 
 
 W_general        <- c("ethnicity_cat", "deprivation", "smoking_cat", "dstartdate_age", "gender_chr", 
                       "tx_startyear", "dstartdate_dm_dur_all", "prehba1c", "preegfr", "prebmi", "prealt",
