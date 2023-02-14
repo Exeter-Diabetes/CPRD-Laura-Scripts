@@ -6,6 +6,9 @@
 #summ(MVR_GI_model, digits = 4)
 
 
+
+#for(i in 2:5){
+
 #
 # Set paths --------------------------------------------------------------------
 #
@@ -95,6 +98,51 @@ source("triangulation_method_summary.R")
 
 
 #
+# Falls models -----------------------------------------------------------------
+#
+
+
+which_outcome         <- "falls"
+outcome_variable_type <- "binary"
+
+source("triangulation_method_summary.R")
+
+
+#
+# Amputation models ------------------------------------------------------------
+#
+
+
+which_outcome         <- "amputation"
+outcome_variable_type <- "binary"
+
+source("triangulation_method_summary.R")
+
+
+#
+# DKA models -------------------------------------------------------------------
+#
+
+
+which_outcome         <- "dka"
+outcome_variable_type <- "binary"
+
+source("triangulation_method_summary.R")
+
+
+#
+# Lower limb fractures and falls (combined) models -----------------------------
+#
+
+
+which_outcome         <- "llffalls"
+outcome_variable_type <- "binary"
+
+source("triangulation_method_summary.R")
+
+
+
+#
 # HbA1c models -----------------------------------------------------------------
 #
 
@@ -114,5 +162,12 @@ which_outcome         <- "weight"
 outcome_variable_type <- "continuous"
 
 source("triangulation_method_summary.R")
+
+
+#print(i)
+
+#}
+
+
 
 

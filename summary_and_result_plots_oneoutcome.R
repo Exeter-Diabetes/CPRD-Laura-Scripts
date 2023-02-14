@@ -37,7 +37,7 @@ treatment_name      <- c("treatment","treatment", "X_hat_IV_prevpatient", "X_hat
 results_outcomes    <- c("GI", "OS", "AX", "HbA1c", "weightchange", "weight")
 
 reference_line <- ifelse(outcome_interest == "HbA1c" | outcome_interest == "weightchange" | outcome_interest == "weight" , 0, 1)
-x_scale_name   <- ifelse(outcome_interest == "HbA1c" | outcome_interest == "weightchange" | outcome_interest == "weight", "Estmate", "relative risk (%)")
+x_scale_name   <- ifelse(outcome_interest == "HbA1c" | outcome_interest == "weightchange" | outcome_interest == "weight", "Estimate", "relative risk (%)")
 
 #
 # Build empty results table ----------------------------------------------------
@@ -65,7 +65,7 @@ for(p in 1:length(results_populations)){
     subset_results <- get(load(paste0(result_path, "/",results_models[m], "_", outcome_interest, "_modelsummary_", year_type, "_c", censoring_type, "_",results_populations[p],".Rdata" )))
     
     if(outcome_interest == "HbA1c" | outcome_interest == "weightchange" | outcome_interest == "weight"){
-       
+      
       result_data$causal_estimate[result_data$cohort == results_populations[p] & result_data$methods == results_models[m]] <- (subset_results$coeftable[treatment_name[m], "Est."])
       result_data$lower[result_data$cohort == results_populations[p] & result_data$methods == results_models[m]]           <- (subset_results$coeftable[treatment_name[m], "2.5%"])
       result_data$upper[result_data$cohort == results_populations[p] & result_data$methods == results_models[m]]           <- (subset_results$coeftable[treatment_name[m], "97.5%"])
@@ -123,7 +123,7 @@ p <- ggplot(result_data, aes(x=cohort, y=causal_estimate, ymin=lower, ymax=upper
   theme(legend.title=element_blank())+
   theme(legend.key.size = unit(1, 'cm'))+
   ggtitle(paste0(outcome_interest, " - model results"," (",year_type," follow up, censoring type ",  censoring_type, ")"))
-  
+
 
 
 Cairo(file = paste0(result_path,"/estimation_results_",outcome_interest,"_",year_type,"_c",censoring_type,".png"), 
@@ -139,11 +139,3 @@ plot(p)
 
 
 dev.off()
-
-
-
-
-
-
-
-
